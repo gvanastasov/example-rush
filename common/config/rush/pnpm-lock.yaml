@@ -1,12 +1,20 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@rush-temp/example-components': file:./projects/example-components.tgz
   '@rush-temp/example-math': file:./projects/example-math.tgz
 
 dependencies:
+  '@rush-temp/example-components': file:projects/example-components.tgz
   '@rush-temp/example-math': file:projects/example-math.tgz
 
 packages:
+
+  file:projects/example-components.tgz:
+    resolution: {integrity: sha512-KA3EPwX/yeU6/6K+FGCEXs8+g0m5q5Q6iQiZPz2oFX8Pz+cQ827TccjL21zMgb7DNSQVRTxARsRKnYnPdQykVQ==, tarball: file:projects/example-components.tgz}
+    name: '@rush-temp/example-components'
+    version: 0.0.0
+    dev: false
 
   file:projects/example-math.tgz:
     resolution: {integrity: sha512-LKgrQ6OoigxuAgZNB3hg54ba7KRTbbjaTWPHQ10BJWVcDKp/t4gylyH9puvBOLQeVjJWqL0RVd2rLqXNpw0O2g==, tarball: file:projects/example-math.tgz}
