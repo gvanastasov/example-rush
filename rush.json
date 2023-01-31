@@ -429,6 +429,10 @@
     {
       "packageName": "example-components",
       "projectFolder": "libs/example-components"
+    },
+    {
+      "packageName": "example-calculator",
+      "projectFolder": "apps/example-calculator"
     }
   ]
 }
