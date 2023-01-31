@@ -425,6 +425,10 @@
     {
       "packageName": "example-math",
       "projectFolder": "libs/example-math"
+    },
+    {
+      "packageName": "example-components",
+      "projectFolder": "libs/example-components"
     }
   ]
 }
