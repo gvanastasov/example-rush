@@ -28,12 +28,19 @@ class App extends React.Component {
   }
   
   clearDisplay() {
-    this.state.display = ''
+    this.setState({
+      display: DEFAULT_STATE.display
+    })
   }
 
   append(val) {
     if (this.state.renew) {
       this.reset()
+    }
+
+    const zeroInvalidAppend = val == '0' && this.state.display === DEFAULT_STATE.display
+    if (zeroInvalidAppend) {
+      return
     }
 
     this.setState({ 
@@ -114,7 +121,7 @@ class App extends React.Component {
             <button onClick={() => this.setOperation('add')}>+</button>
             
             <button>+/-</button>
-            <button onClick={() => this.state.display ? this.append('0') : null}>0</button>
+            <button onClick={() => this.append('0')}>0</button>
             <button>,</button>
             <button onClick={() => this.eval()} className="secondary">=</button>
           </div>
