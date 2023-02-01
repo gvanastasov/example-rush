@@ -20,10 +20,6 @@ const OPERATIONS = {
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.init()
-  }
-
-  init() {
     this.state = { ...DEFAULT_STATE }
   }
 
@@ -45,12 +41,13 @@ class App extends React.Component {
       display = DEFAULT_STATE.display
     }
 
-    const zeroInvalidAppend = val == '0' && this.state.display === DEFAULT_STATE.display
-    if (zeroInvalidAppend) {
+    const zeroInvalidAppend = val === '0' && display === DEFAULT_STATE.display
+    const floatingPointExists = val === ',' && display.indexOf(val) > -1
+    if (zeroInvalidAppend || floatingPointExists) {
       return
     }
 
-    const infinity = !Number.isFinite(Number(this.state.display + val))
+    const infinity = !Number.isFinite(Number((display + val).replace(',', '.')))
     if (infinity) {
       return
     }
@@ -71,6 +68,7 @@ class App extends React.Component {
     })
   }
 
+  // todo: handle seop without eval for chaining
   setOperation(op) {
     const chainOperations = this.state.renew
     if (chainOperations) {
@@ -79,7 +77,7 @@ class App extends React.Component {
 
     this.setState({ 
       op,
-      operand1: Number(this.state.display), 
+      operand1: Number(this.state.display.replace(',', '.')), 
       eq: `${this.state.display} ${this.getOperationSign(op)}` 
     })
     this.clearDisplay()
@@ -99,13 +97,13 @@ class App extends React.Component {
       return;
     }
 
-    const operand2 = Number(this.state.display)
+    const operand2 = Number(this.state.display.replace(',', '.'))
     const op = operations[this.state.op]
     const result = op(this.state.operand1, operand2)
 
     this.setState({ 
-      display: result,
-      eq: `${this.state.eq} ${operand2} =`,
+      display: result.toString().replace('.', ','),
+      eq: `${this.state.eq} ${operand2.toString().replace('.', ',')} =`,
       renew: true
     })
   }
@@ -118,7 +116,7 @@ class App extends React.Component {
             this.state.eq === DEFAULT_STATE.eq ? '\u00A0' : this.state.eq
           }</div>
           <div className="calculator-display">{
-            this.state.display == DEFAULT_STATE.display ? '0' : this.state.display
+            this.state.display === DEFAULT_STATE.display ? '0' : this.state.display
           }</div>
           <div className="calculator-keyboard">
             <button disabled></button>
@@ -143,7 +141,7 @@ class App extends React.Component {
             
             <button>+/-</button>
             <button onClick={() => this.append('0')}>0</button>
-            <button>,</button>
+            <button onClick={() => this.append(',')}>,</button>
             <button onClick={() => this.eval()} className="secondary">=</button>
           </div>
         </div>
