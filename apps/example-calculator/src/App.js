@@ -68,6 +68,10 @@ class App extends React.Component {
   }
 
   setOperation(op) {
+    if (this.state.renew) {
+      this.setState({ renew: false })
+    }
+
     this.setState({ 
       op, 
       operand1: Number(this.state.display), 
