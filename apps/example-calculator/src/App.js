@@ -43,6 +43,11 @@ class App extends React.Component {
       return
     }
 
+    const infinity = !Number.isFinite(Number(this.state.display + val))
+    if (infinity) {
+      return
+    }
+
     this.setState({ 
       display: this.state.display + val
     })
