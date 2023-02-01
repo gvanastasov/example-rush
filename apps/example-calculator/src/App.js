@@ -47,6 +47,11 @@ class App extends React.Component {
       return
     }
 
+    const zeroFloatingAppend = val === ',' && display === DEFAULT_STATE.display
+    if (zeroFloatingAppend) {
+      display = '0'
+    }
+
     const infinity = !Number.isFinite(this.getFloat((display + val)))
     if (infinity) {
       return
@@ -97,6 +102,7 @@ class App extends React.Component {
     return Number(string.replace(',', '.'))
   }
   
+  // todo: handle outside of screen
   eval() {
     const noOperation = !this.state.op
     const alreadyEvaluated = this.state.renew
