@@ -34,8 +34,11 @@ class App extends React.Component {
   }
 
   append(val) {
+    let display = this.state.display
+
     if (this.state.renew) {
       this.reset()
+      display = DEFAULT_STATE.display
     }
 
     const zeroInvalidAppend = val == '0' && this.state.display === DEFAULT_STATE.display
@@ -49,7 +52,7 @@ class App extends React.Component {
     }
 
     this.setState({ 
-      display: this.state.display + val
+      display: display + val
     })
   }
 
