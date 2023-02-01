@@ -47,7 +47,7 @@ class App extends React.Component {
       return
     }
 
-    const infinity = !Number.isFinite(Number((display + val).replace(',', '.')))
+    const infinity = !Number.isFinite(this.getFloat((display + val)))
     if (infinity) {
       return
     }
@@ -77,7 +77,7 @@ class App extends React.Component {
 
     this.setState({ 
       op,
-      operand1: Number(this.state.display.replace(',', '.')), 
+      operand1: this.getFloat(this.state.display), 
       eq: `${this.state.display} ${this.getOperationSign(op)}` 
     })
     this.clearDisplay()
@@ -88,6 +88,14 @@ class App extends React.Component {
       [OPERATIONS.ADD]: '+',
     }[op]
   }
+
+  getPrettyFloat(float) {
+    return float.toString().replace('.', ',')
+  }
+
+  getFloat(string) {
+    return Number(string.replace(',', '.'))
+  }
   
   eval() {
     const noOperation = !this.state.op
@@ -97,13 +105,13 @@ class App extends React.Component {
       return;
     }
 
-    const operand2 = Number(this.state.display.replace(',', '.'))
+    const operand2 = this.getFloat(this.state.display)
     const op = operations[this.state.op]
     const result = op(this.state.operand1, operand2)
 
     this.setState({ 
-      display: result.toString().replace('.', ','),
-      eq: `${this.state.eq} ${operand2.toString().replace('.', ',')} =`,
+      display: this.getPrettyFloat(result),
+      eq: `${this.state.eq} ${this.getPrettyFloat(operand2)} =`,
       renew: true
     })
   }
