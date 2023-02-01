@@ -13,6 +13,10 @@ const DEFAULT_STATE = {
   renew: false
 }
 
+const OPERATIONS = {
+  ADD: 'add' 
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -68,12 +72,13 @@ class App extends React.Component {
   }
 
   setOperation(op) {
-    if (this.state.renew) {
+    const chainOperations = this.state.renew
+    if (chainOperations) {
       this.setState({ renew: false })
     }
 
     this.setState({ 
-      op, 
+      op,
       operand1: Number(this.state.display), 
       eq: `${this.state.display} ${this.getOperationSign(op)}` 
     })
@@ -82,7 +87,7 @@ class App extends React.Component {
 
   getOperationSign(op) {
     return {
-      'add': '+',
+      [OPERATIONS.ADD]: '+',
     }[op]
   }
   
@@ -109,8 +114,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="calculator">
-          <div className="calculator-equation">{this.state.eq == '' ? '\u00A0' : this.state.eq}</div>
-          <div className="calculator-display">{this.state.display == '' ? '0' : this.state.display}</div>
+          <div className="calculator-equation">{
+            this.state.eq === DEFAULT_STATE.eq ? '\u00A0' : this.state.eq
+          }</div>
+          <div className="calculator-display">{
+            this.state.display == DEFAULT_STATE.display ? '0' : this.state.display
+          }</div>
           <div className="calculator-keyboard">
             <button disabled></button>
             <button onClick={() => this.clearDisplay()}>CE</button>
@@ -130,7 +139,7 @@ class App extends React.Component {
             <button onClick={() => this.append('1')}>1</button>
             <button onClick={() => this.append('2')}>2</button>
             <button onClick={() => this.append('3')}>3</button>
-            <button onClick={() => this.setOperation('add')}>+</button>
+            <button onClick={() => this.setOperation(OPERATIONS.ADD)}>+</button>
             
             <button>+/-</button>
             <button onClick={() => this.append('0')}>0</button>
