@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 import { Button } from 'example-components'
@@ -20,6 +19,9 @@ const OPERATIONS = {
   DIVIDE: 'divide'
 }
 
+// todo: separate presentation from business logic better
+// todo: handle culture
+// todo: handle big numbers
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -159,30 +161,30 @@ class App extends React.Component {
             this.state.display === DEFAULT_STATE.display ? '0' : this.state.display
           }</div>
           <div className="calculator-keyboard">
-            <button onClick={() => this.revert(1)}>&#60;</button>
-            <button onClick={() => this.clearDisplay()}>CE</button>
-            <button onClick={() => this.reset()}>C</button>
-            <button onClick={() => this.setOperation(OPERATIONS.DIVIDE)}>/</button>
+            <Button onClick={() => this.revert(1)}>&#60;</Button>
+            <Button onClick={() => this.clearDisplay()}>CE</Button>
+            <Button onClick={() => this.reset()}>C</Button>
+            <Button onClick={() => this.setOperation(OPERATIONS.DIVIDE)}>/</Button>
 
-            <button onClick={() => this.append('7')}>7</button>
-            <button onClick={() => this.append('8')}>8</button>
-            <button onClick={() => this.append('9')}>9</button>
-            <button onClick={() => this.setOperation(OPERATIONS.MULTIPLY)}>x</button>
+            <Button onClick={() => this.append('7')}>7</Button>
+            <Button onClick={() => this.append('8')}>8</Button>
+            <Button onClick={() => this.append('9')}>9</Button>
+            <Button onClick={() => this.setOperation(OPERATIONS.MULTIPLY)}>x</Button>
             
-            <button onClick={() => this.append('4')}>4</button>
-            <button onClick={() => this.append('5')}>5</button>
-            <button onClick={() => this.append('6')}>6</button>
-            <button onClick={() => this.setOperation(OPERATIONS.SUBTRACT)}>-</button>
+            <Button onClick={() => this.append('4')}>4</Button>
+            <Button onClick={() => this.append('5')}>5</Button>
+            <Button onClick={() => this.append('6')}>6</Button>
+            <Button onClick={() => this.setOperation(OPERATIONS.SUBTRACT)}>-</Button>
 
-            <button onClick={() => this.append('1')}>1</button>
-            <button onClick={() => this.append('2')}>2</button>
-            <button onClick={() => this.append('3')}>3</button>
-            <button onClick={() => this.setOperation(OPERATIONS.ADD)}>+</button>
+            <Button onClick={() => this.append('1')}>1</Button>
+            <Button onClick={() => this.append('2')}>2</Button>
+            <Button onClick={() => this.append('3')}>3</Button>
+            <Button onClick={() => this.setOperation(OPERATIONS.ADD)}>+</Button>
             
-            <button onClick={() => this.reverseSign()}>+/-</button>
-            <button onClick={() => this.append('0')}>0</button>
-            <button onClick={() => this.append(',')}>,</button>
-            <button onClick={() => this.eval()} className="secondary">=</button>
+            <Button onClick={() => this.reverseSign()}>+/-</Button>
+            <Button onClick={() => this.append('0')}>0</Button>
+            <Button onClick={() => this.append(',')}>,</Button>
+            <Button onClick={() => this.eval()} className="secondary">=</Button>
           </div>
         </div>
       </div>
