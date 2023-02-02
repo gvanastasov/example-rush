@@ -73,11 +73,15 @@ class App extends React.Component {
     })
   }
 
-  // todo: handle seop without eval for chaining
   setOperation(op) {
-    const chainOperations = this.state.renew
-    if (chainOperations) {
+    const renewOperation = this.state.renew
+    if (renewOperation) {
       this.setState({ renew: false })
+    }
+
+    const chainOperation = !this.state.renew && !!this.state.op
+    if (chainOperation) {
+      this.eval()
     }
 
     this.setState({ 
