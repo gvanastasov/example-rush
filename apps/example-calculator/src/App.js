@@ -14,7 +14,10 @@ const DEFAULT_STATE = {
 }
 
 const OPERATIONS = {
-  ADD: 'add' 
+  ADD: 'add',
+  SUBTRACT: 'subtract',
+  MULTIPLY: 'multiple',
+  DIVIDE: 'divide'
 }
 
 class App extends React.Component {
@@ -52,8 +55,9 @@ class App extends React.Component {
       display = '0'
     }
 
-    const infinity = !Number.isFinite(this.getFloat((display + val)))
+    const infinity = Number.POSITIVE_INFINITY === Math.abs(this.getFloat((display + val)))
     if (infinity) {
+      console.log(infinity)
       return
     }
 
@@ -106,6 +110,9 @@ class App extends React.Component {
   getOperationSign(op) {
     return {
       [OPERATIONS.ADD]: '+',
+      [OPERATIONS.SUBTRACT]: '-',
+      [OPERATIONS.MULTIPLY]: '*',
+      [OPERATIONS.DIVIDE]: '/'
     }[op]
   }
 
@@ -149,20 +156,20 @@ class App extends React.Component {
             this.state.display === DEFAULT_STATE.display ? '0' : this.state.display
           }</div>
           <div className="calculator-keyboard">
-            <button disabled></button>
+            <button onClick={() => this.revert(1)}>&#60;</button>
             <button onClick={() => this.clearDisplay()}>CE</button>
             <button onClick={() => this.reset()}>C</button>
-            <button onClick={() => this.revert(1)}>&#60;</button>
+            <button onClick={() => this.setOperation(OPERATIONS.DIVIDE)}>/</button>
 
             <button onClick={() => this.append('7')}>7</button>
             <button onClick={() => this.append('8')}>8</button>
             <button onClick={() => this.append('9')}>9</button>
-            <button>x</button>
+            <button onClick={() => this.setOperation(OPERATIONS.MULTIPLY)}>x</button>
             
             <button onClick={() => this.append('4')}>4</button>
             <button onClick={() => this.append('5')}>5</button>
             <button onClick={() => this.append('6')}>6</button>
-            <button>-</button>
+            <button onClick={() => this.setOperation(OPERATIONS.SUBTRACT)}>-</button>
 
             <button onClick={() => this.append('1')}>1</button>
             <button onClick={() => this.append('2')}>2</button>
