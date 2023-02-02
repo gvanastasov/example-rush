@@ -103,7 +103,10 @@ class App extends React.Component {
     }
 
     this.setState({
-      display: this.state.display
+      display: 
+        this.state.display[0] === '-' 
+          ? this.state.display.slice(1, this.state.display.length)
+          : `-${this.state.display}`
     })
   }
 
