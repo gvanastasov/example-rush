@@ -88,6 +88,17 @@ class App extends React.Component {
     this.clearDisplay()
   }
 
+  reverseSign() {
+    const noInput = this.state.display === DEFAULT_STATE.display
+    if (noInput) {
+      return
+    }
+
+    this.setState({
+      display: this.state.display
+    })
+  }
+
   getOperationSign(op) {
     return {
       [OPERATIONS.ADD]: '+',
@@ -126,6 +137,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="calculator">
+          <div className="calculator-heading">Example Calculator</div>
           <div className="calculator-equation">{
             this.state.eq === DEFAULT_STATE.eq ? '\u00A0' : this.state.eq
           }</div>
@@ -153,7 +165,7 @@ class App extends React.Component {
             <button onClick={() => this.append('3')}>3</button>
             <button onClick={() => this.setOperation(OPERATIONS.ADD)}>+</button>
             
-            <button>+/-</button>
+            <button onClick={() => this.reverseSign()}>+/-</button>
             <button onClick={() => this.append('0')}>0</button>
             <button onClick={() => this.append(',')}>,</button>
             <button onClick={() => this.eval()} className="secondary">=</button>
