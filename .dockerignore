@@ -1,0 +1,10 @@
+# Development environment artifacts
+.github
+.vscode
+
+# Rush artifacts
+**/node_modules
+common/temp
+
+# Build artifacts
+apps/example-calculator/build

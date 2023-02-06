@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "rush.json": "jsonc"
+        "rush.json": "jsonc",
+        "deploy.json": "jsonc",
+        "command-line.json": "jsonc"
     }
 }

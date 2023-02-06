@@ -3,7 +3,11 @@ import commonjs from "@rollup/plugin-commonjs";
 import babel from "@rollup/plugin-babel";
 import externals from "rollup-plugin-node-externals";
 import del from "rollup-plugin-delete";
-import pkg from "./package.json" assert { type: "json" };
+import fs from "fs"
+
+const pkg = JSON.parse(
+  fs.readFileSync(
+    new URL("./package.json", import.meta.url)))
 
 export default [
   {
@@ -16,10 +20,11 @@ export default [
       }),
       babel({
         // babelHelpers: "runtime",
+        babelHelpers: "bundled",
         exclude: "**/node_modules/**",
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       }),
-    commonjs(),
+      commonjs(),
     ],
     output: [
       { file: pkg.main, format: "cjs" },

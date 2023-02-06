@@ -39,6 +39,16 @@ rushx start
 
 Docker:
 
+1. Build images
+```sh
+docker build --tag example_calculator:latest .
+```
+
+2. Run container
+```sh
+# adjust your port forwarding accordingly to your setup/needs.
+docker run -i -p 3000:3000 -t example_calculator:latest 
+```
 
 ## **Trace**
 

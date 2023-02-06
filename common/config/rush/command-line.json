@@ -5,6 +5,18 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/command-line.schema.json",
 
+  "phases": [
+    {
+      "name": "_phase:build",
+
+      "dependencies": {
+        "upstream": ["_phase:build"]
+      },
+
+      "allowWarningsOnSuccess": true
+    }
+  ],
+
   /**
    * Custom "commands" introduce new verbs for the command-line.  To see the help for these
    * example commands, try "rush --help", "rush my-bulk-command --help", or
